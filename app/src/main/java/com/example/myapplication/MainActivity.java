@@ -4,11 +4,17 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.example.myapplication.adapter.RecyclerViewListAdapter;
+import com.example.myapplication.model.MyListData;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -16,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+   /*     Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -26,7 +32,27 @@ public class MainActivity extends AppCompatActivity {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
-        });
+        });*/
+
+        MyListData[] myListData = new MyListData[] {
+                new MyListData("Barbeque", R.drawable.barbeque),
+                new MyListData("Breakfast", R.drawable.breakfast),
+                new MyListData("Chicken", R.drawable.chicken),
+                new MyListData("Beef", R.drawable.beef),
+                new MyListData("Brunch", R.drawable.brunch),
+                new MyListData("Dinner", R.drawable.dinner),
+                new MyListData("Wine", R.drawable.wine),
+                new MyListData("Italian", R.drawable.italian),
+        };
+
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+
+        RecyclerViewListAdapter adapter = new RecyclerViewListAdapter(myListData);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.addItemDecoration(new DividerItemDecoration(getBaseContext(),DividerItemDecoration.VERTICAL));
+        recyclerView.setAdapter(adapter);
+
     }
 
     @Override
